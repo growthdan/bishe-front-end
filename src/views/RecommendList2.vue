@@ -1,7 +1,7 @@
 <template>
 <div>
     <h1>管理员的推荐列表</h1>
-     <el-table :data="store.recommends" style="width: 100%">
+     <el-table :data="store.recommends" current-row-key="id" style="width: 100%">
     <el-table-column prop="user_name" label="推荐人" width="100" />
     <el-table-column prop="singer_name" label="推荐歌手" width="100" />
     <el-table-column prop="recommend_reason" label="推荐原因" width="300" />
@@ -11,9 +11,21 @@
         label="操作"  
         width="200"  
       >  
-        <template #default="scope">  
+        <template v-slot:default="scope">  
           <el-button type="primary" @click="handleDelete(scope.row)">更改进度</el-button>
-          <el-button type="danger" @click="handleDelete(scope.row)">删除</el-button>  
+          <el-popconfirm
+         width="220"
+         confirm-button-text="确定"
+         cancel-button-text="不，谢谢"
+        :icon="InfoFilled"
+        icon-color="#626AEF"
+        title="确定要删除此条推荐吗?"
+        @confirm = "store.deleteRecommend(scope.row.id)"
+      >
+    <template #reference>
+      <el-button type="danger" >删除</el-button>
+    </template>
+  </el-popconfirm>
         </template>  
       </el-table-column>  
   </el-table>
@@ -32,6 +44,7 @@ import { onMounted } from "vue";
 import { useStore } from "@/store/index";
 import type {Recommend} from "@/datasource/Types"
 import {ref} from 'vue'
+import { InfoFilled } from '@element-plus/icons-vue'
 // 响应式数据  
 const currentPage = ref(1);  
 const pageSize = ref(5);  

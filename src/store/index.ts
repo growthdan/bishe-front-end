@@ -21,6 +21,16 @@ export  const useStore = defineStore('useStore', {
     totle:0 as Number,//总页数
  }),
    actions:{
+    //删除推荐
+    async deleteRecommend(id:number){
+       try {
+           const resp = await axios.delete('recommend/delete',{params:{id:id}})
+          this.message = resp.data.message
+          alert(this.message)
+       } catch {
+           // 
+       }
+   },
     //查询推荐页数
     async seleNum(){
         if(window.sessionStorage.getItem("role") === ADMIN){
