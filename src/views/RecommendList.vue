@@ -11,9 +11,21 @@
         label="操作"  
         width="200"  
       >  
-        <template #default="scope">  
-          <el-button type="danger" @click="handleDelete(scope.row)">删除</el-button>  
-        </template>  
+      <template v-slot:default="scope">  
+          <el-popconfirm
+         width="220"
+         confirm-button-text="确定"
+         cancel-button-text="不，谢谢"
+        :icon="InfoFilled"
+        icon-color="#626AEF"
+        title="确定要删除此条推荐吗?"
+        @confirm = "store.deleteRecommend(scope.row.id)"
+      >
+    <template #reference>
+      <el-button type="danger" >删除</el-button>
+    </template>
+  </el-popconfirm>
+        </template> 
       </el-table-column>  
   </el-table>
   <el-pagination  
@@ -32,7 +44,7 @@ import { onMounted } from "vue";
 import { useStore } from "@/store/index";
 import type {Recommend} from "@/datasource/Types"
 import {ref} from 'vue'
-
+import { InfoFilled } from '@element-plus/icons-vue'
 const store = useStore()
 
 

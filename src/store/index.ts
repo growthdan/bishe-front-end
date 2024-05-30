@@ -21,6 +21,16 @@ export  const useStore = defineStore('useStore', {
     totle:0 as Number,//总页数
  }),
    actions:{
+    //更改进度
+    async changeComplete(id:number){
+        try {
+           const resp = await axios.get('recommend/change',{params:{id:id}})
+           this.message = resp.data.message
+           alert(this.message)
+        } catch {
+            // 
+        }
+    },
     //删除推荐
     async deleteRecommend(id:number){
        try {

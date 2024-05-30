@@ -12,7 +12,7 @@
         width="200"  
       >  
         <template v-slot:default="scope">  
-          <el-button type="primary" @click="handleDelete(scope.row)">更改进度</el-button>
+          <el-button @click="store.changeComplete(scope.row.id)" type="success" :icon="Check" circle />
           <el-popconfirm
          width="220"
          confirm-button-text="确定"
@@ -45,6 +45,9 @@ import { useStore } from "@/store/index";
 import type {Recommend} from "@/datasource/Types"
 import {ref} from 'vue'
 import { InfoFilled } from '@element-plus/icons-vue'
+import {
+  Check,
+} from '@element-plus/icons-vue'
 // 响应式数据  
 const currentPage = ref(1);  
 const pageSize = ref(5);  
@@ -75,3 +78,8 @@ const handleDelete = (data:Recommend)=>{
 }
 
 </script>
+<style scoped>
+.ml-2{
+  padding-right: 10px;
+}
+</style>
