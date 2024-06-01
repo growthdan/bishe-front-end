@@ -16,7 +16,6 @@
       </template>
       <template #extra>
         <div class="flex items-center">
-          <el-button>Home</el-button>
           <el-popconfirm
     width="220"
     confirm-button-text="确定"

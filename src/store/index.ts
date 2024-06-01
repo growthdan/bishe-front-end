@@ -21,6 +21,21 @@ export  const useStore = defineStore('useStore', {
     totle:0 as Number,//总页数
  }),
    actions:{
+    //提交用户资料
+    async submitUser(newuser:User){
+        try {
+            const resp = await axios({
+               method:'post',
+               data:newuser,
+               url:'user/change'
+           }) 
+           this.message = resp.data.message
+           alert(this.message)
+        } catch {
+            // 
+            alert(this.message)
+        }
+    },
     //更改进度
     async changeComplete(id:number){
         try {
@@ -165,6 +180,7 @@ export  const useStore = defineStore('useStore', {
            this.user.role = resp.data.data.role;
            this.role=resp.data.data.role;
            this.user.nickname = resp.data.data.nickname;
+           this.user.email = resp.data.data.email;
          }
         } catch {
             // 
